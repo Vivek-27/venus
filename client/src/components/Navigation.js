@@ -29,7 +29,7 @@ const Navigation = () => {
       </div>
       <ul>
         <li>
-          <Link to={'/'}>
+          <Link to={'/home'}>
             <HomeRoundedIcon style={{ color: 'black' }} />
           </Link>
         </li>

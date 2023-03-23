@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import s from './styles/Auth.module.css';
-import DP from './icons/logobk.png';
-import Account from './Account';
 import axios from 'axios';
 
 const Auth = (props) => {
@@ -39,37 +37,18 @@ const Auth = (props) => {
     );
   };
 
-  const [prop, setProps] = useState({
-    name: '',
-    email: '',
-    password: '',
-    username: ''
-  });
-
   const login = async (e) => {
     e.preventDefault();
     await axios.post('/login', value).then((res) => {
-      // console.log(res);
       alert(`Welcome ${res.data.name}`);
       if (res) {
-        setIsLogin(true);
-        const { name, email, password, username } = res.data;
-        setProps((data) => {
-          return {
-            ...data,
-            name,
-            email,
-            password,
-            username
-          };
-        });
+        props.onLogin(res.data);
       }
     });
   };
 
   return (
     <>
-      {isLogin && <Account props={prop} />}
       {!isLogin && (
         <div>
           {!isSignUp && (
@@ -108,7 +87,7 @@ const Auth = (props) => {
                   </button>
                 </div>
 
-                <p>
+                <p className={s.p} style={{ marginBottom: '10px' }}>
                   Please login to your account. If not click Sign Up to create
                   one.
                 </p>
@@ -167,7 +146,7 @@ const Auth = (props) => {
                     Login
                   </button>
                 </div>
-                <p>
+                <p className={s.p}>
                   <input
                     type="checkbox"
                     name="agree"
