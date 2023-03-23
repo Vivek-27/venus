@@ -29,5 +29,5 @@ app.use('/get', (req, res) => {
 });
 
 app.post('/register', registerUser);
-
 app.use('/login', loginUser);
+app.post;
